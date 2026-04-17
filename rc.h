@@ -29,7 +29,7 @@ void *rc_alloc(size_t size, void (*destroy)(void *data))
 
 void *rc_acquire(void *data)
 {
-    Rc *rc = (Rc*)data - 1;
+    Rc *rc = (Rc*)data - 2;
     rc->count += 1;
     // printf("[RC] %p acquired\n", rc);
     return data;
@@ -37,7 +37,7 @@ void *rc_acquire(void *data)
 
 void rc_release(void *data)
 {
-    Rc *rc = (Rc*)data - 1;
+    Rc *rc = (Rc*)data - 2;
     rc->count -= 1;
     if (rc->count <= 0) {
         rc->destroy(rc + 2);
